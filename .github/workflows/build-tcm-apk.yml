@@ -22,10 +22,12 @@ jobs:
         uses: android-actions/setup-android@v3
       - name: Grant Gradle wrapper permissions
         run: chmod +x gradlew
-      - name: Configure Gradle memory
+      - name: Configure Gradle memory + reinforce properties
         run: |
           echo "org.gradle.jvmargs=-Xmx6g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:+UseParallelGC -XX:MaxMetaspaceSize=1g" >> gradle.properties
           echo "org.gradle.workers.max=2" >> gradle.properties
+          echo "android.useAndroidX=true" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
       - name: Build generic debug APK
         run: ./gradlew assembleGenericDebug --stacktrace -PNC_TEST_SERVER_BASEURL=http://server -PNC_TEST_SERVER_USERNAME=test -PNC_TEST_SERVER_PASSWORD=test
       - name: Rename APK
