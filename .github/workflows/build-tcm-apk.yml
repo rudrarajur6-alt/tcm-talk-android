@@ -29,11 +29,11 @@ jobs:
           echo "android.useAndroidX=true" >> gradle.properties
           echo "android.enableJetifier=true" >> gradle.properties
       - name: Build generic debug APK
-        run: ./gradlew assembleGenericDebug --stacktrace -PNC_TEST_SERVER_BASEURL=http://server -PNC_TEST_SERVER_USERNAME=test -PNC_TEST_SERVER_PASSWORD=test
+        run: ./gradlew assembleQaDebug --stacktrace -PNC_TEST_SERVER_BASEURL=http://server -PNC_TEST_SERVER_USERNAME=test -PNC_TEST_SERVER_PASSWORD=test
       - name: Rename APK
         run: |
           mkdir -p out
-          cp app/build/outputs/apk/generic/debug/*.apk out/tcm-talk-debug.apk
+          cp app/build/outputs/apk/qa/debug/*.apk out/tcm-talk-debug.apk
           ls -la out/
       - uses: actions/upload-artifact@v4
         with:
